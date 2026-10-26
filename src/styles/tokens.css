@@ -1,0 +1,48 @@
+/* Fonts are copied into /public/fonts by scripts/copy-fonts.mjs (npm install). */
+@font-face { font-family: 'OpenDyslexic'; font-weight: 400; font-style: normal; font-display: swap;
+  src: local('OpenDyslexic'), url('/fonts/opendyslexic-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'OpenDyslexic'; font-weight: 700; font-style: normal; font-display: swap;
+  src: local('OpenDyslexic Bold'), url('/fonts/opendyslexic-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Atkinson Hyperlegible'; font-weight: 400; font-style: normal; font-display: swap;
+  src: local('Atkinson Hyperlegible'), url('/fonts/atkinson-hyperlegible-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Atkinson Hyperlegible'; font-weight: 700; font-style: normal; font-display: swap;
+  src: local('Atkinson Hyperlegible Bold'), url('/fonts/atkinson-hyperlegible-latin-700-normal.woff2') format('woff2'); }
+
+:root {
+  --cream: #faf8f3;
+  --surface: #fffefa;
+  --border: #e8e4da;
+  --navy: #2d4a73;
+  --navy-tint: #eaf0fa;
+  --green: #2e9e5b;
+  --amber: #f2a33a;
+  --info: #7c8cf0;
+  --ink: #1f2733;
+  --muted: #5b6573;
+  --syl-blue: #2d5bd1;
+  --syl-green: #1f8a4c;
+  --hl: #fff1b8;
+  --dot: #cf5c5c;
+  --radius: 16px;
+  --radius-sm: 12px;
+  --shadow: 0 5px 18px rgba(43, 48, 58, 0.06);
+  --font-ui: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-read-dyslexic: 'OpenDyslexic', 'Atkinson Hyperlegible', 'Comic Sans MS', sans-serif;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+  color-scheme: light;
+}
+
+/* ---- page appearance, driven by data attributes on a "page" element ---- */
+[data-tint='white'] { --page-bg: #ffffff; --page-ink: #1f2733; --page-dim: #a3a9b2; --page-band: #f0f1f4; --page-ui: #ffffff; --page-line: #e3e5ea; }
+[data-tint='cream'] { --page-bg: #faf3df; --page-ink: #1f2733; --page-dim: #a9a591; --page-band: #f3e8c8; --page-ui: #fffdf6; --page-line: #e6dcbc; }
+[data-tint='mint']  { --page-bg: #e8f3eb; --page-ink: #1d3027; --page-dim: #8fa89a; --page-band: #d3e8da; --page-ui: #f4faf6; --page-line: #c5dccd; }
+[data-tint='midnight'] { --page-bg: #27364a; --page-ink: #edf2fa; --page-dim: #7d8ca2; --page-band: #364a64; --page-ui: #304158; --page-line: #43566f; --hl: #6b5d2a; }
+
+[data-font='dyslexic'] { --font-read: var(--font-read-dyslexic); }
+[data-font='atkinson'] { --font-read: 'Atkinson Hyperlegible', 'Segoe UI', system-ui, sans-serif; }
+[data-font='modern']   { --font-read: Arial, 'Helvetica Neue', system-ui, sans-serif; }
+
+[data-spacing='standard'] { --lh: 1.6; --ls: 0em; --ws: 0em; }
+[data-spacing='relaxed']  { --lh: 1.9; --ls: 0.04em; --ws: 0.08em; }
+[data-spacing='wide']     { --lh: 2.2; --ls: 0.08em; --ws: 0.16em; }
