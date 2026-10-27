@@ -1,61 +1,59 @@
-# iRead
+# iRead — Reading that feels natural
 
-A calm, dyslexia-friendly reading app, built as a **responsive PWA** (React 19 + TypeScript + Vite).
-It is a portfolio demo: all data lives on the device, and read-aloud uses the browser's built-in voices.
+> A calm, dyslexia-friendly reading app with syllable help, read-aloud and a personal word bank.
 
-- **Tablet landscape first** (nav rail, two-pane reader with a 360px Word Helper side panel), with a compact **phone** layout (bottom tabs, bottom sheets). Breakpoint: 900px.
-- **Installable and offline-capable** (web manifest + service worker generated at build time).
-- **No backend.** State is persisted in `localStorage`; a sensible demo dataset is seeded on first launch.
+[![Live demo](https://img.shields.io/badge/Live%20demo-iread--rust.vercel.app-2ea44f?style=for-the-badge)](https://iread-rust.vercel.app)
 
-## Run it
+iRead is a reading app for people navigating **dyslexia**. It makes text easier to approach with syllable help, read-aloud and a personal word bank, all inside a deliberately quiet interface.
 
-```powershell
-npm install        # also copies the OpenDyslexic + Atkinson fonts into public/fonts
-npm run dev        # http://localhost:5173
-npm run typecheck
-npm test
-npm run build      # outputs dist/ (service worker + precache list included)
-npm run preview    # serve the production build; try "Install app" / go offline
-```
+This is the working build of my **UX case study**, which covered research, wireframes, high-fidelity mock-ups and an interactive prototype before any code was written.
 
-Hosting under a sub-path (for example GitHub Pages): `$env:VITE_BASE="/iread/"; npm run build`.
-Routing uses the URL hash (`#/library`), so no server rewrite rules are needed.
+<!-- Add 3–4 screenshots here, e.g.:
+<p align="center"><img src="docs/screenshots/reader.png" width="22%"> <img src="docs/screenshots/syllables.png" width="22%"> <img src="docs/screenshots/word-bank.png" width="22%"></p>
+-->
 
-## What is in the app
-
-| Area | Screens |
+| | |
 | --- | --- |
-| Onboarding | Splash, Welcome, 3-step account, Quick Comfort Check, Reading Comfort setup (live preview) |
-| Library | My Bookshelf (continue reading, recommended decodables, topic + phonics filters), Explore Topics, Search with filter sheet |
-| Reading | Book detail, Reader (focus band + ruler, read-aloud word highlight, syllable guides, Aa panel), Word Helper, Book Completed + visual comprehension check |
-| Practice | Word Bank (master-detail on tablet), Practice cards with optional voice check |
-| Progress | My Reading Journey (streak calendar, phonics progress, trophies) |
-| Adults | Settings (comfort, audio, reminders, profile, privacy, help), PIN-gated Parent/Educator dashboard with CSV export |
+| **Live demo** | <https://iread-rust.vercel.app> |
+| **Type** | Progressive web app, responsive for mobile and tablet |
+| **Audience** | Readers with dyslexia, including children who often lack a phone |
 
-Demo PIN for the adult area: `1234`.
+---
 
-## Code map
+## Key features
 
-```
-src/
-  App.tsx, main.tsx, router.tsx (tiny hash router), store.tsx (reducer + persistence), pwa.ts
-  data/       books.ts (stories, topics, trophies), words.ts (hand-checked syllables + definitions)
-  lib/        syllables.ts (rule-based fallback), speech.ts (TTS + recognition wrapper), dates.ts (streaks), search.ts, hooks.ts
-  components/ ui.tsx (buttons, chips, toggles, sheet, toast), Shell, WordPanel (side panel / sheet), BookBits, ...
-  screens/    one file per screen group
-  styles/     tokens.css (colors, fonts, page tints), base.css (primitives, shell), screens.css (screens + tablet layout)
-public/       manifest.webmanifest, sw.js, icons/
-tests/        logic.test.ts (syllables, streaks, reducer, search, router)
-```
+- **Syllable help:** support for decoding longer words.
+- **Read-aloud:** hear text read aloud on demand.
+- **Personal word bank:** keep the words you want to practise.
+- **Calm by design:** a soft, warm off-white palette instead of a stark white page.
 
-## Adding content
+## Design and UX highlights
 
-Add a book to `src/data/books.ts` (pages are arrays of sentences; list the tricky words in `hard`) and give each
-`hard`/`practice` word an entry in `src/data/words.ts`. Words without an entry still work: the rule-based
-syllable splitter in `src/lib/syllables.ts` is used, with a generic definition.
+- **Research-led.** The product grew out of user research, wireframes, hi-fi mock-ups and an interactive prototype.
+- **Mobile and tablet layouts.** Because many young readers use a tablet rather than a phone, the design covers both screen sizes.
+- **A full Figma design system** (components plus mobile and tablet frames) that the front end is built from.
 
-## Known limits
+## Tech stack
 
-- Read-aloud and the "Say it" voice check depend on browser support (voice check: Chrome and Safari). Without voices, the word highlight still advances on a timer.
-- Reminders are stored as a preference only; push notifications are not implemented.
-- Covers and illustrations are generated (gradient + emoji) so the app works offline.
+| Layer | Technology |
+| --- | --- |
+| Front end | **React** + **TypeScript** |
+| App model | **Progressive Web App**, with theme colour and iOS home-screen metadata |
+| Design | **Figma** (design system, mobile and tablet), Figma Make |
+| Hosting | **Vercel** |
+
+<!-- TODO(stack): add the build tool, styling approach, how read-aloud and syllable splitting work, and any back-end services (check package.json). -->
+
+## Engineering highlights
+
+- **Design-to-code fidelity.** The interface was built from exported Figma designs, so spacing, colour and type follow the design system.
+- **App-like on any device.** PWA metadata lets the site be saved to a phone or tablet home screen.
+- **One codebase for phone and tablet layouts** rather than two separate products.
+
+## Roadmap
+
+- Complete the remaining tablet-landscape screens
+
+---
+
+**Designed and built by [Daniel Long](https://daniel7long.com)** · M.S. Human-Computer Interaction, Carnegie Mellon University
